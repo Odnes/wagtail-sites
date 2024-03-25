@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<div class="columns">
+    <div class="column is-two-thirds">
+        <a href="/">
+            <img src="/static/assets/eosartas_logo.png" alt="Logo">
+            <div id="site-name">
+                {% if current_site and current_site.site_name %}{{current_site.site_name}}
+                    {% else %}Site Title
+                {% endif %}
+            </div>
+        </a>
+    </div>
+    <div class="column is-one-third" id="info-container">
+        <div id="sm">
+            <a href="https://www.facebook.com/eosartas" target="_blank">
+                <img class="sm-thumbnail" alt="facebook" src="/static/assets/fb.png">
+            </a>
+            <a href="https://www.instagram.com/eos_artas/" target="_blank"> 
+                <img class="sm-thumbnail" alt="instagram" src="/static/assets/insta.png">
+            </a>
+            <a href="https://www.youtube.com/channel/UCuRUeFHgaFTKOA9CjaD0LZg" target="_blank">
+                <img class="sm-thumbnail" alt="youtube" src="/static/assets/yt.png">
+            </a>
+        </div>
+        <span>Διεύθυνση: {ADDRESS}</span>
+        <br><br>
+        <span>Ώρες λειτουργίας:</span><br>
+        <span>{DAYS}</span><br>
+        <span>{HOURS}</span>
+        <br><br>
+        <span>Email: {EMAIL}</span><br>
+        <span>Τηλ: {TELEPHONE}</span>
+    </div>
+</div>

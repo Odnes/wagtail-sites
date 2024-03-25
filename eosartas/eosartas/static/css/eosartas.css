@@ -1,0 +1,75 @@
+body {
+    background-color: #f4f6f7;
+    background-image: url("/static/assets/eosartas_background.jpg");
+    background-size: cover;
+    min-height:100vh; /* Necessary as Bulma makes body height dynamic */
+    border-top: 3px solid #0088cc;
+    padding: 1em;
+}
+
+.container {
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px; 
+    padding: 1.5em;
+    max-width: 68em;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+#hero, #hero::before{
+    font-size:1em;
+    color: #800000;
+    font-family: book antiqua, palatino, serif;
+    font-style: italic;
+    text-align: center;
+    line-height:1.8em;
+    white-space: pre;
+    overflow:hidden;
+    content: "\
+Το είδος μας δεν γεννήθηκε μέσα στο τσιμέντο, αλλά μέσα σε αγρια δάση και λιβάδεια\. Τα μάτια μας εξελίχθηκαν για να διακρίνουν\A
+τις λεπτές διαφορές ανάμεσα στις χρυσαφένιες, πρασινωπές και καφεκόκκινες αποχρώσεις των ωρίμων καρπών και των φύλλων,\A
+και όχι για να αγναντεύουν το γκρίζο των πόλεων\.\A\
+";
+}
+
+#info-container{
+    text-align:right;
+    font-style:italic;
+}
+
+#sm{
+    height:3em;
+    margin-top:0.5em;
+    margin-bottom:1em;
+}
+
+.sm-thumbnail{
+    height: 100%;
+    object-fit:scale-down; 
+    margin-right:0.5em;
+    padding:0.2em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+}
+
+#site-name{
+  margin-top: 0.5em;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #001a27;
+}
+#site-name:hover{
+    color: #005e8d;
+}
+
+h2{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+input{
+    max-width: 90%;
+    display: block;
+}
