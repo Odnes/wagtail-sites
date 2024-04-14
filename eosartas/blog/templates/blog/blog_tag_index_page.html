@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    {% if request.GET.tag %}
+        <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
+    {% endif %}
+
+<!-- duplicate code of blog index, perhaps can be DRYed up-->
+    {% for child_page in blogpages %}
+        <h1><a href="{% pageurl child_page %}">{{ child_page.title }}</a></h1>
+        <p>{{ child_page.specific.body|truncatewords:50|richtext }}</p>
+        <a href="{% pageurl child_page %}">Read more</a>
+
+    {% empty %}
+        No pages found with that tag.
+    {% endfor %}
+
+{% endblock %}

@@ -27,6 +27,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/eosartas.css' %}">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
@@ -38,30 +41,17 @@
             <header>
                 {% include 'header.html' %}
             </header>
-            <nav>
-            {% wagtail_site as current_site %}
-                <p>
-                <a href="{% pageurl current_site.root_page %}">Home</a> |
-                {% for menuitem in current_site.get_children.live.show_in_menus %}
-                    <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
-                {% endfor %}
-                </p>
-            </nav> 
 
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                {% include 'navbar.html' %}
+            </nav>
             {% block hero %}{% endblock %}
             <div class="columns">
                 <main class="column is-three-quarters">
                     {% block content %}{% endblock %}
                 </main>
                 <aside class="column is-one-quarter">
-
-                    <form action="{% url 'search' %}" method="get">
-                        <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                        <input type="submit" value="Search" class="button">
-                    </form>
-
-
-                    write something here
+                    {% include "aside.html" %} 
                 </aside>
             </div>
         </div>

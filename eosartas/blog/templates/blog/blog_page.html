@@ -1,0 +1,50 @@
+{# "page" lowercased == "self" #}
+
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+
+{% block content %}
+    {% for block in page.body %}
+        {% if block.block_type == 'gallery' %}
+            <div class="gallery columns is-multiline">
+                
+<!--Remove --> {# for item in page.carousel_images.all #}
+                {# image item.carousel_image fill-900x400 as img #}
+<!--              <a class="image-zoom" href="#modal-image-{{forloop.counter}}">
+                            <img src="{{img.url}}" alt="{{img.alt}}">
+                        </a>
+                        <div id="modal-image-{{forloop.counter}}" class="modal">
+                            <div class="modal-background"></div>
+                            <div class="modal-content">
+                                <img src="{{img.url}}" alt="{{img.alt}}">
+                            </div>
+                            <button class="modal-close is-large" aria-label="close"></button>
+                        </div>-->
+
+                {% for item in block.value %}
+                    {% if item.block_type == "image" %}
+                        <div class="column is-3">{% image item.value width-400 %}</div>
+                    {% else %}
+                        Videos gallery feature not implemented yet!
+                    {% endif %}
+                {% endfor %}
+        {% else %}
+        {{block}}
+        {% endif %}
+    {% endfor %}
+            </div>
+           
+
+    {% with tags=page.tags.all %}
+        {% if tags %}
+            <div class="tags">
+                <h3>Tags</h3>
+                {% for tag in tags %}
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+{% endblock content %}

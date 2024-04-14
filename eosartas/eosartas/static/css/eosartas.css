@@ -1,4 +1,5 @@
 body {
+    color: #333;
     background-color: #f4f6f7;
     background-image: url("/static/assets/eosartas_background.jpg");
     background-size: cover;
@@ -26,7 +27,7 @@ body {
     line-height:1.8em;
     white-space: pre;
     overflow:hidden;
-    content: "\
+    content: "\ 
 Το είδος μας δεν γεννήθηκε μέσα στο τσιμέντο, αλλά μέσα σε αγρια δάση και λιβάδεια\. Τα μάτια μας εξελίχθηκαν για να διακρίνουν\A
 τις λεπτές διαφορές ανάμεσα στις χρυσαφένιες, πρασινωπές και καφεκόκκινες αποχρώσεις των ωρίμων καρπών και των φύλλων,\A
 και όχι για να αγναντεύουν το γκρίζο των πόλεων\.\A\
@@ -64,12 +65,63 @@ body {
     color: #005e8d;
 }
 
+h1, h2{
+    font-family: "Open Sans", sans-serif;
+    font-weight:600;
+}
+h1{
+    font-size:1.4em;
+}
 h2{
-    font-size: 1.3em;
-    font-weight: bold;
+    font-size:1.2em;
+}
+
+p{
+    margin-bottom: 0.5em;
 }
 
 input{
     max-width: 90%;
     display: block;
+}
+
+.aside-item-container{
+    min-height:15em;
+    padding: 1em;
+    margin-bottom: 1em;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.aside-item-container > h2 {
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0.3em;
+}
+
+.left {
+    width:45%;
+    float:left;
+    margin: 0.5em 1.5em 0.5em 0em; 
+}
+
+.right {
+    width: 45%;
+    float:right;
+    margin:0.5em 0em 0.5em 1.5em;
+}
+
+.full-width{ 
+    max-height:40em;
+    height: auto;
+    width: auto;
+    /* centering hack */
+    display: block;
+    margin: 3.5em auto;
+}
+
+.hidden{
+    display: none;
 }
