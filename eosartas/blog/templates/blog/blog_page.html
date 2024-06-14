@@ -5,7 +5,8 @@
 {% load static %}
 
 {% block content %}
-    {% for block in page.body %}
+<h1>{{ page.title }}</h1>
+    {% for block in page.body %} 
         {% if block.block_type == 'gallery' %}
             <div class="gallery columns is-multiline">
                 
@@ -29,19 +30,23 @@
                         Videos gallery feature not implemented yet!
                     {% endif %}
                 {% endfor %}
+            </div>
+        {% elif block.block_type == 'image' %}
+            <div class="block-image">
+                {{block}}
+            </div>
         {% else %}
-        {{block}}
+            {{block}}
         {% endif %}
     {% endfor %}
-            </div>
            
 
     {% with tags=page.tags.all %}
         {% if tags %}
             <div class="tags">
-                <h3>Tags</h3>
+                <h3>Tags:</h3>
                 {% for tag in tags %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button class="button is-small" type="button">{{ tag }}</button></a>
                 {% endfor %}
             </div>
         {% endif %}

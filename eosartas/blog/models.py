@@ -19,22 +19,8 @@ class HomePage(Page):
 #    parent_page_types = [] # uncomment to henceforth hide this model from admin options
     pass
 
-class BlogTagIndexPage(Page):
-#    parent_page_types = [] # uncomment to henceforth hide this model from admin options
 
-    def get_context(self, request):
-
-        # Filter by tag
-        tag = request.GET.get('tag')
-        blogpages = BlogPage.objects.filter(tags__name=tag)
-
-        # Update template context
-        context = super().get_context(request)
-        context['blogpages'] = blogpages
-        return context
-
-
-class BlogIndexPage(Page):
+class IndexPage(Page):
 #    parent_page_types = [] # uncomment to henceforth hide this model from admin options
     subpage_types = ['blog.BlogPage']
 
@@ -48,8 +34,7 @@ class BlogPageTag(TaggedItemBase):
 
 
 class BlogPage(Page):
-    parent_page_types = ['blog.BlogIndexPage']
-
+    parent_page_types = ['blog.IndexPage']
 
     date = models.DateField("Post date", default=date.today)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
@@ -71,11 +56,6 @@ class BlogPage(Page):
             FieldPanel('tags')
         ], heading="Blog information"),
             FieldPanel('body'),
-      # Might use later for sidebar related articles tab
-      #  MultiFieldPanel(
-      #      [InlinePanel("carousel_images", label="Image")],
-      #      heading="Carousel Images",
-      #  ),
     ]
     search_fields = Page.search_fields + [ # Inherit search_fields from Page
            index.SearchField('body')
@@ -114,3 +94,5 @@ class MenuItem(Orderable):
         FieldPanel('has_dropdown'),
         FieldPanel('submenus'),
     ]
+
+

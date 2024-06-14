@@ -1,5 +1,5 @@
   <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="nav-expanded">
+    <a role="button" class="navbar-burger is-large" aria-label="menu" aria-expanded="false" data-target="nav-expanded">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -16,7 +16,7 @@
             </a>        
             <div class="navbar-dropdown">
               {% for submenu in item.submenus %}
-                <a class="navbar-item" href="{{ submenu.url }}"> <!-- .is-selected for coloring -->
+                <a class="navbar-item" href="{{ submenu.value.url }}"> <!-- .is-selected for coloring -->
                          {{submenu.value.label}} 
 
                 </a>

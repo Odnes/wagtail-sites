@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load static %}
+
+{% block body_class %}{% endblock %}
+{% block extra_css %}{% endblock extra_css %}
+
+{% block hero %}<section id="hero"></section>{% endblock %}
+{% block content %}
+    {% for blog_post in blog_posts %}
+        <article>
+            <h1><a href="{% pageurl blog_post %}">{{ blog_post.title }}</a></h1>
+            <!-- "specific" because get_children() draws instances of the base Page class,
+                 which only contains the title, no body or other custom fields.
+                richtext filter actualy redundant as RichTextBlock (streamfield) performs
+                conversion automatically when rendered as string -->
+            <p>{{ blog_post.specific.body|truncatewords:50|richtext }}</p>
+            <a href="{% pageurl blog_post %}">Διαβάστε περισσότερα</a>
+        </article>
+    {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if blog_posts.has_previous %}
+            <a href="?page=1">&laquo; Πρώτη σελίδα</a>
+             | 
+            <a href="?page={{ blog_posts.previous_page_number }}">Προηγούμενη σελίδα</a>
+        {% endif %}
+
+        <span class="current">
+            Σελίδα {{ blog_posts.number }} στις {{ blog_posts.paginator.num_pages }}.
+        </span>
+
+        {% if blog_posts.has_next %}
+            <a href="?page={{ blog_posts.next_page_number }}">Επόμενη σελίδα</a>
+             | 
+            <a href="?page={{ blog_posts.paginator.num_pages }}">Τελευταία σελίδα &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock content %}

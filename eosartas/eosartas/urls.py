@@ -31,8 +31,10 @@ urlpatterns = urlpatterns + [
     # Wagtail's page serving mechanism. This should be the last pattern in
     # the list:
     path('', lambda request: redirect('/blog'), name='root'),
-    path('blog', blog_views.blog_index, name="blog_index"),
-    path("", include(wagtail_urls)),
+    # for binding model with view regardless of path, override Page.serve()
+    # or use register_page_view wagtail hook
+    path('blog/', blog_views.index, name="index_page"), # needs closing slash
+    path('', include(wagtail_urls)),
     # Alternatively, if you want Wagtail pages to be served from a subpath
     # of your site, rather than the site root:
     #    path("pages/", include(wagtail_urls)),

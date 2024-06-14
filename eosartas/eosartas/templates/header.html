@@ -1,9 +1,11 @@
+{% load static wagtailcore_tags %}
 <!DOCTYPE html>
 <div class="columns">
     <div class="column is-two-thirds">
         <a href="/">
-            <img src="/static/assets/eosartas_logo.png" alt="Logo">
+            <img src="{% static '/assets/eosartas_logo.png' %}" alt="Logo">
             <div id="site-name">
+                {% wagtail_site as current_site %}
                 {% if current_site and current_site.site_name %}{{current_site.site_name}}
                     {% else %}Site Title
                 {% endif %}
@@ -13,22 +15,22 @@
     <div class="column is-one-third" id="info-container">
         <div id="sm">
             <a href="https://www.facebook.com/eosartas" target="_blank">
-                <img class="sm-thumbnail" alt="facebook" src="/static/assets/fb.png">
+                <img class="sm-thumbnail" alt="facebook" src="{% static '/assets/fb.png' %}">
             </a>
             <a href="https://www.instagram.com/eos_artas/" target="_blank"> 
-                <img class="sm-thumbnail" alt="instagram" src="/static/assets/insta.png">
+                <img class="sm-thumbnail" alt="instagram" src="{% static '/assets/insta.png' %}">
             </a>
             <a href="https://www.youtube.com/channel/UCuRUeFHgaFTKOA9CjaD0LZg" target="_blank">
-                <img class="sm-thumbnail" alt="youtube" src="/static/assets/yt.png">
+                <img class="sm-thumbnail" alt="youtube" src="{% static '/assets/yt.png' %}">
             </a>
         </div>
-        <span>Διεύθυνση: {ADDRESS}</span>
+        <span>Διεύθυνση: {{info.ADDRESS}}</span>
         <br><br>
         <span>Ώρες λειτουργίας:</span><br>
-        <span>{DAYS}</span><br>
-        <span>{HOURS}</span>
+        <span>{{info.DAYS}}</span><br>
+        <span>{{info.HOURS}}</span>
         <br><br>
-        <span>Email: {EMAIL}</span><br>
-        <span>Τηλ: {TELEPHONE}</span>
+        <span>Email: {{info.EMAIL}}</span><br>
+        <span>Τηλ: {{info.TELEPHONE}}</span>
     </div>
 </div>
