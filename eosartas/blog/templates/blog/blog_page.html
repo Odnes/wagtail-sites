@@ -10,8 +10,6 @@
         {% if block.block_type == 'gallery' %}
             <div class="gallery columns is-multiline">
                 
-<!--Remove --> {# for item in page.carousel_images.all #}
-                {# image item.carousel_image fill-900x400 as img #}
 <!--              <a class="image-zoom" href="#modal-image-{{forloop.counter}}">
                             <img src="{{img.url}}" alt="{{img.alt}}">
                         </a>
@@ -22,10 +20,14 @@
                             </div>
                             <button class="modal-close is-large" aria-label="close"></button>
                         </div>-->
-
+<!-- {# image item.carousel_image fill-900x400 as img #} -->
                 {% for item in block.value %}
                     {% if item.block_type == "image" %}
-                        <div class="column is-3">{% image item.value width-400 %}</div>
+                        <div class="column is-3"> 
+                            <a href="{{ item.value.file.url }}" data-lightbox="gallery">
+                                {% image item.value width-400 %}
+                            </a>
+                        </div>
                     {% else %}
                         Videos gallery feature not implemented yet!
                     {% endif %}

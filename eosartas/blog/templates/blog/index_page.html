@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 {% load static %}
 
 {% block body_class %}{% endblock %}
@@ -8,14 +8,25 @@
 {% block hero %}<section id="hero"></section>{% endblock %}
 {% block content %}
     {% for blog_post in blog_posts %}
-        <article>
-            <h1><a href="{% pageurl blog_post %}">{{ blog_post.title }}</a></h1>
-            <!-- "specific" because get_children() draws instances of the base Page class,
-                 which only contains the title, no body or other custom fields.
-                richtext filter actualy redundant as RichTextBlock (streamfield) performs
-                conversion automatically when rendered as string -->
-            <p>{{ blog_post.specific.body|truncatewords:50|richtext }}</p>
-            <a href="{% pageurl blog_post %}">Διαβάστε περισσότερα</a>
+        <article class="article-preview">
+            <h1><a href="{% pageurl blog_post %}">{{ blog_post.title }}</a></h1> 
+            <section class="content">
+                {% for block in blog_post.specific.intro %}
+                    {% if block.block_type == 'paragraph' %}
+                        <p>{{ block }}</p>
+                    {% elif block.block_type == 'gallery' %} 
+                    {% else %}
+                        {{ block }}
+                    {% endif %}
+                    <!-- "specific" because get_children() draws instances of the base Page class,
+                         which only contains the title, no body or other custom fields.
+                        richtext filter actualy redundant as RichTextBlock (streamfield) performs
+                        conversion automatically when rendered as string -->
+                {% endfor %}
+            </section>
+            {% if blog_post.specific.body %}
+                <a class="read-more" href="{% pageurl blog_post %}">Διαβάστε περισσότερα</a>
+            {% endif %}
         </article>
     {% endfor %}
 

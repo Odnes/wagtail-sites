@@ -3,8 +3,9 @@
 <div class="columns">
     <div class="column is-two-thirds">
         <a href="/">
-            <img src="{% static '/assets/eosartas_logo.png' %}" alt="Logo">
+            <img class="no-border" src="{% static '/assets/eosartas_logo.png' %}" alt="Logo">
             <div id="site-name">
+                <!-- needs to be set as default site in wagtail admin, apparently-->
                 {% wagtail_site as current_site %}
                 {% if current_site and current_site.site_name %}{{current_site.site_name}}
                     {% else %}Site Title

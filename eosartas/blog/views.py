@@ -10,7 +10,7 @@ def index(request):
     else:
         blog_posts = BlogPage.objects.live().public().order_by('-date')
     
-    paginator = Paginator(blog_posts, 2)
+    paginator = Paginator(blog_posts, 5)
     page_number = request.GET.get('page')
 
     try:

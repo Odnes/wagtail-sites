@@ -39,7 +39,7 @@ class BlogPage(Page):
     date = models.DateField("Post date", default=date.today)
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
 
-    body = StreamField([
+    intro = StreamField([
         ('heading', blocks.CharBlock(form_classname="")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -49,12 +49,23 @@ class BlogPage(Page):
         ),             
     ])
 
+    body = StreamField([
+        ('heading', blocks.CharBlock(form_classname="")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+        ('gallery', blocks.StreamBlock([('image', ImageChooserBlock()),
+                                        ('video', ImageChooserBlock())
+                                       ])
+        ),             
+    ], blank=True)
+
 
     content_panels = Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('tags')
         ], heading="Blog information"),
+            FieldPanel('intro'),
             FieldPanel('body'),
     ]
     search_fields = Page.search_fields + [ # Inherit search_fields from Page
