@@ -8,16 +8,31 @@
 {% block hero %}<section id="hero"></section>{% endblock %}
 {% block content %}
     {% for blog_post in blog_posts %}
-        <article class="article-preview">
+        <article class="article-preview" id="{{blog_post.slug}}">
             <h1><a href="{% pageurl blog_post %}">{{ blog_post.title }}</a></h1> 
             <section class="content">
                 {% for block in blog_post.specific.intro %}
                     {% if block.block_type == 'paragraph' %}
                         <p>{{ block }}</p>
+                    {% elif block.block_type == 'image' %}
+                        <a href="{{ block.value.file.url }}" data-lightbox="gallery-{{blog_post.slug}}">
+                            {{ block }}
+                        </a>
                     {% elif block.block_type == 'gallery' %} 
+                        <div class="gallery columns is-multiline">
+                            {% for item in block.value %}
+                                {% if item.block_type == "image" %}
+                                    <div class="column is-3"> 
+                                        <a href="{{ item.value.file.url }}" data-lightbox="gallery-{{blog_post.slug}}">
+                                            {% image item.value width-400 %}
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     {% else %}
                         {{ block }}
-                    {% endif %}
+                    {% endif %} 
                     <!-- "specific" because get_children() draws instances of the base Page class,
                          which only contains the title, no body or other custom fields.
                         richtext filter actualy redundant as RichTextBlock (streamfield) performs
@@ -50,4 +65,18 @@
     </span>
 </div>
 
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const richtextImages = document.querySelectorAll('.richtext-image');
+
+        richtextImages.forEach(item => {
+            const link = document.createElement('a');
+            link.href = `${item.src}`;
+            articleSlug = item.closest('article').getAttribute('id')
+           link.setAttribute("data-lightbox", `gallery-${articleSlug}`);
+            item.parentNode.insertBefore(link, item);
+            link.appendChild(item);
+        });
+    });
+</script>
 {% endblock content %}

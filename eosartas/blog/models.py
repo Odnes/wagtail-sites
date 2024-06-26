@@ -11,6 +11,7 @@ from wagtail.models import Page, Orderable
 from wagtail.snippets.models import register_snippet
 from wagtail.fields import StreamField
 from wagtail import blocks
+from wagtail.blocks import RawHTMLBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.search import index
@@ -57,6 +58,7 @@ class BlogPage(Page):
                                         ('video', ImageChooserBlock())
                                        ])
         ),             
+        ('raw_html', RawHTMLBlock()),
     ], blank=True)
 
 

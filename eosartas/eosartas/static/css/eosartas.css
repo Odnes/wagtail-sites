@@ -193,6 +193,9 @@ article::after {
     clear: both;
 }
 
+.gallery {
+    clear: both;
+}
 
 /* 
 .article-preview {

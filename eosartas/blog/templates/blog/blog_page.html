@@ -5,7 +5,32 @@
 {% load static %}
 
 {% block content %}
-<h1>{{ page.title }}</h1>
+    <h1>{{ page.title }}</h1>
+    
+    {% for block in page.intro %}
+        {% if block.block_type == 'paragraph' %}
+            <p>{{ block }}</p>
+        {% elif block.block_type == 'image' %}
+            <a href="{{ block.value.file.url }}" data-lightbox="gallery">
+                {{ block }}
+            </a>
+        {% elif block.block_type == 'gallery' %} 
+            <div class="gallery columns is-multiline">
+                {% for item in block.value %}
+                    {% if item.block_type == "image" %}
+                        <div class="column is-3"> 
+                            <a href="{{ item.value.file.url }}" data-lightbox="gallery">
+                                {% image item.value width-400 %}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ block }}
+        {% endif %}
+    {% endfor %}
+
     {% for block in page.body %} 
         {% if block.block_type == 'gallery' %}
             <div class="gallery columns is-multiline">
@@ -35,7 +60,9 @@
             </div>
         {% elif block.block_type == 'image' %}
             <div class="block-image">
-                {{block}}
+                <a href="{{ block.value.file.url }}" data-lightbox="gallery">
+                    {{ block }}
+                </a>
             </div>
         {% else %}
             {{block}}
@@ -54,4 +81,16 @@
         {% endif %}
     {% endwith %}
 
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const richtextImages = document.querySelectorAll('.richtext-image');
+        richtextImages.forEach(item => {
+            const link = document.createElement('a');
+            link.href = `${item.src}`;
+            link.setAttribute("data-lightbox", `gallery`);
+            item.parentNode.insertBefore(link, item);
+            link.appendChild(item);
+        });
+    });
+</script>
 {% endblock content %}
