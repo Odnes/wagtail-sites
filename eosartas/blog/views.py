@@ -1,9 +1,9 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
-from .models import BlogPage
+from .models import BlogPage, IndexPage
 
 
-def index(request):
+def index(request): 
     tag = request.GET.get('tag')
     if tag:
         blog_posts = BlogPage.objects.live().public().filter(tags__name=tag).order_by('-date')
@@ -25,5 +25,7 @@ def index(request):
         "blog/index_page.html",
         {
             "blog_posts": blog_posts_paginated,
+            # page is passed automatically only in implicit view function
+            "page": IndexPage.objects.live().first() 
         },
     )

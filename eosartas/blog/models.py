@@ -12,6 +12,7 @@ from wagtail.snippets.models import register_snippet
 from wagtail.fields import StreamField
 from wagtail import blocks
 from wagtail.blocks import RawHTMLBlock
+from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.search import index
@@ -44,8 +45,9 @@ class BlogPage(Page):
         ('heading', blocks.CharBlock(form_classname="")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+        ('video', EmbedBlock()),
         ('gallery', blocks.StreamBlock([('image', ImageChooserBlock()),
-                                        ('video', ImageChooserBlock())
+                                        #('video', EmbedBlock())
                                        ])
         ),             
     ])
@@ -54,8 +56,9 @@ class BlogPage(Page):
         ('heading', blocks.CharBlock(form_classname="")),
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
+        ('video', EmbedBlock()),
         ('gallery', blocks.StreamBlock([('image', ImageChooserBlock()),
-                                        ('video', ImageChooserBlock())
+                                        #('video', EmbedBlock())
                                        ])
         ),             
         ('raw_html', RawHTMLBlock()),
