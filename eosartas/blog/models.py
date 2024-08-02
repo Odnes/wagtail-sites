@@ -49,7 +49,8 @@ class BlogPage(Page):
         ('gallery', blocks.StreamBlock([('image', ImageChooserBlock()),
                                         #('video', EmbedBlock())
                                        ])
-        ),             
+        ),
+        ('raw_html', RawHTMLBlock()),
     ])
 
     body = StreamField([
@@ -60,7 +61,7 @@ class BlogPage(Page):
         ('gallery', blocks.StreamBlock([('image', ImageChooserBlock()),
                                         #('video', EmbedBlock())
                                        ])
-        ),             
+        ),
         ('raw_html', RawHTMLBlock()),
     ], blank=True)
 
@@ -99,7 +100,7 @@ class MenuItem(Orderable):
     submenus = StreamField([
         ('submenu_item', blocks.StructBlock([
             ('label', blocks.CharBlock()),
-            ('url', blocks.CharBlock()), 
+            ('url', blocks.CharBlock()),
         ])
         )
     ], blank=True)
@@ -110,5 +111,3 @@ class MenuItem(Orderable):
         FieldPanel('has_dropdown'),
         FieldPanel('submenus'),
     ]
-
-
