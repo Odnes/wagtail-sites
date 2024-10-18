@@ -149,6 +149,7 @@ STORAGES = {
     # See https://docs.djangoproject.com/en/5.0/ref/contrib/staticfiles/#manifeststaticfilesstorage
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+        # for testing, temporarily replace with django.contrib.staticfiles.storage.StaticFilesStorage
     },
 }
 

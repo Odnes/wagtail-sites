@@ -8,24 +8,23 @@
 {% block hero %}<section id="hero"></section>{% endblock %}
 {% block content %}
 
-<h1>{{page.title}}HELLO</h1>
     {% for blog_post in blog_posts %}
         <article class="article-preview" id="{{blog_post.slug}}">
-            <h1><a href="{% pageurl blog_post %}">{{ blog_post.title }}</a></h1> 
+            <h1><a href="{% pageurl blog_post %}">{{ blog_post.title }}</a></h1>
             <section class="content">
                 {% for block in blog_post.specific.intro %}
                     {% if block.block_type == 'paragraph' %}
                         <p>{{ block }}</p>
                     {% elif block.block_type == 'image' %}
-                        <a href="{{ block.value.file.url }}" data-lightbox="gallery-{{blog_post.slug}}">
+                        <a href="{{ block.value.file.url }}" data-lightbox="gallery-{{blog_post.slug}}"></a>
                             {{ block }}
                         </a>
-                    {% elif block.block_type == 'gallery' %} 
+                    {% elif block.block_type == 'gallery' %}
                         <div class="gallery columns is-multiline">
                             {% for item in block.value %}
                                 {% if item.block_type == "image" %}
-                                    <div class="column is-3"> 
-                                        <a href="{{ item.value.file.url }}" data-lightbox="gallery-{{blog_post.slug}}">
+                                    <div class="column is-3">
+                                        <a href="{{ item.value.file.url }}" data-lightbox="gallery-{{blog_post.slug}}"></a>
                                             {% image item.value width-400 %}
                                         </a>
                                     </div>
@@ -34,7 +33,7 @@
                         </div>
                     {% else %}
                         {{ block }}
-                    {% endif %} 
+                    {% endif %}
                     <!-- "specific" because get_children() draws instances of the base Page class,
                          which only contains the title, no body or other custom fields.
                         richtext filter actualy redundant as RichTextBlock (streamfield) performs
@@ -51,7 +50,7 @@
     <span class="step-links">
         {% if blog_posts.has_previous %}
             <a href="?page=1">&laquo; Πρώτη σελίδα</a>
-             | 
+             |
             <a href="?page={{ blog_posts.previous_page_number }}">Προηγούμενη σελίδα</a>
         {% endif %}
 
@@ -61,7 +60,7 @@
 
         {% if blog_posts.has_next %}
             <a href="?page={{ blog_posts.next_page_number }}">Επόμενη σελίδα</a>
-             | 
+             |
             <a href="?page={{ blog_posts.paginator.num_pages }}">Τελευταία σελίδα &raquo;</a>
         {% endif %}
     </span>
